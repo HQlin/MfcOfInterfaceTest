@@ -18,6 +18,7 @@ CMfcOfInterfaceTestDlg::CMfcOfInterfaceTestDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMfcOfInterfaceTestDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m = 32, n = 32;
 }
 
 void CMfcOfInterfaceTestDlg::DoDataExchange(CDataExchange* pDX)
@@ -52,17 +53,10 @@ BOOL CMfcOfInterfaceTestDlg::OnInitDialog()
 	//SystemParametersInfo(SPI_GETWORKAREA,0,&rcWorkArea,0); 
 	//MoveWindow(&rcWorkArea); 
 
-	//对话框窗体大小及其屏幕坐标
-	CRect rectDlg;
-	GetClientRect(rectDlg);//获得窗体的大小
-
-	int m = 20;
-	int n = 20;
-	myRect.ScreenInit(m, n, rectDlg, 10, 0);
 
 	//字体大小
 	LOGFONT m_zoomFont;
-	m_zoomFont.lfHeight	= rectDlg.Height()/20;
+	m_zoomFont.lfHeight	= rectDlg.Height()/m;
 	m_zoomFont.lfWidth	= 0;
 	m_zoomFont.lfEscapement	= 0;
 	m_zoomFont.lfOrientation	= 0;
@@ -79,26 +73,26 @@ BOOL CMfcOfInterfaceTestDlg::OnInitDialog()
 	m_font.CreateFontIndirectW(&m_zoomFont);
 
 	//小矩形
-	//btn = new CButton[m*n];  
-	//DWORD dwStyle = WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON;  
-	//int a = 0;
-	//for(int i = 0; i < m; i++){  
-	//	for(int j=0; j<n; j++){
-	//		CString str;
-	//		str.Format(L"%d , %d", i, j);
-	//		CRect r = myRect.GetCRect(i, j);
-	//		btn[a].Create(str, dwStyle, r, this, 10000+a); 
-	//		itemResize.AddItemRect(10000+a, this);
-	//		btn[a].SetFont(&m_font);
-	//		a++;
-	//	} 
-	//}	
+	btn = new CButton[m*n];  
+	DWORD dwStyle = WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON;  
+	int a = 0;
+	for(int i = 0; i < m; i++){  
+		for(int j=0; j<n; j++){
+			CString str;
+			str.Format(L"%d , %d", i, j);
+			CRect r = myRect.GetCRect(i, j);
+			btn[a].Create(str, dwStyle, r, this, 10000+a); 
+			itemResize.AddItemRect(10000+a, this);
+			btn[a].SetFont(&m_font);
+			a++;
+		} 
+	}	
 
 	//试用控件
-	GetDlgItem(IDC_BUTTON1)->MoveWindow(myRect.GetCRect(1, 1, 3, 3),TRUE);
-	itemResize.AddItemRect(IDC_BUTTON1, this);
-	GetDlgItem(IDC_BUTTON2)->MoveWindow(myRect.GetCRect(4, 4, 9, 9),TRUE);
-	itemResize.AddItemRect(IDC_BUTTON2, this);
+	//GetDlgItem(IDC_BUTTON1)->MoveWindow(myRect.GetCRect(1, 1, 3, 3),TRUE);
+	//itemResize.AddItemRect(IDC_BUTTON1, this);
+	//GetDlgItem(IDC_BUTTON2)->MoveWindow(myRect.GetCRect(4, 4, 9, 9),TRUE);
+	//itemResize.AddItemRect(IDC_BUTTON2, this);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -150,4 +144,8 @@ void CMfcOfInterfaceTestDlg::OnSize(UINT nType, int cx, int cy)
 	CDialogEx::OnSize(nType, cx, cy);
 	//控件大小适应窗口大小
 	itemResize.ResizeItem();
+	//获得窗体的大小
+	GetClientRect(&rectDlg);
+	//控件布局数据更新
+	myRect.ScreenInit(m, n, rectDlg, 2, 0);
 }

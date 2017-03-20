@@ -35,9 +35,19 @@ protected:
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 
+	//控件适应窗口大小
 	CItemResize itemResize;
 
-	CFont m_font;	 
-
+	//控件动态布局
 	ScreenRect myRect;
+
+	//对话框窗体大小及其窗口坐标（窗口左上角为原点）
+	CRect rectDlg;
+
+	//布局小矩形 x轴与y轴个数
+	int m;
+	int n;
+	
+	//字体
+	CFont m_font;	 
 };
