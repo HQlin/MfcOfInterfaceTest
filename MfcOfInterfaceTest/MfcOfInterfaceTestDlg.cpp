@@ -18,7 +18,7 @@ CMfcOfInterfaceTestDlg::CMfcOfInterfaceTestDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMfcOfInterfaceTestDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m = 32, n = 32;
+	m = 10, n = 20;
 }
 
 void CMfcOfInterfaceTestDlg::DoDataExchange(CDataExchange* pDX)
@@ -56,7 +56,7 @@ BOOL CMfcOfInterfaceTestDlg::OnInitDialog()
 
 	//字体大小
 	LOGFONT m_zoomFont;
-	m_zoomFont.lfHeight	= rectDlg.Height()/m;
+	m_zoomFont.lfHeight	= rectDlg.Height()/50;
 	m_zoomFont.lfWidth	= 0;
 	m_zoomFont.lfEscapement	= 0;
 	m_zoomFont.lfOrientation	= 0;
@@ -89,7 +89,7 @@ BOOL CMfcOfInterfaceTestDlg::OnInitDialog()
 	}	
 
 	//试用控件
-	//GetDlgItem(IDC_BUTTON1)->MoveWindow(myRect.GetCRect(1, 1, 3, 3),TRUE);
+	//GetDlgItem(IDC_BUTTON1)->MoveWindow(myRect.GetCRect(19, 0, 19, 3),TRUE);
 	//itemResize.AddItemRect(IDC_BUTTON1, this);
 	//GetDlgItem(IDC_BUTTON2)->MoveWindow(myRect.GetCRect(4, 4, 9, 9),TRUE);
 	//itemResize.AddItemRect(IDC_BUTTON2, this);
@@ -147,5 +147,5 @@ void CMfcOfInterfaceTestDlg::OnSize(UINT nType, int cx, int cy)
 	//获得窗体的大小
 	GetClientRect(&rectDlg);
 	//控件布局数据更新
-	myRect.ScreenInit(m, n, rectDlg, 2, 0);
+	myRect.ScreenInit(m, n, rectDlg, 2, 1);
 }
