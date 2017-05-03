@@ -50,4 +50,5 @@ public:
 	
 	//×ÖÌו
 	CFont m_font;	 
+
 };

@@ -18,7 +18,7 @@ CMfcOfInterfaceTestDlg::CMfcOfInterfaceTestDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CMfcOfInterfaceTestDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m = 10, n = 20;
+	m = n = 32;
 }
 
 void CMfcOfInterfaceTestDlg::DoDataExchange(CDataExchange* pDX)
@@ -47,16 +47,16 @@ BOOL CMfcOfInterfaceTestDlg::OnInitDialog()
 
 	// TODO: 在此添加额外的初始化代码
 	//全屏
-	//this->ShowWindow(SW_MAXIMIZE);
+	this->ShowWindow(SW_MAXIMIZE);
 	//显示出任务栏
-	//CRect rcWorkArea; 
-	//SystemParametersInfo(SPI_GETWORKAREA,0,&rcWorkArea,0); 
-	//MoveWindow(&rcWorkArea); 
+	CRect rcWorkArea; 
+	SystemParametersInfo(SPI_GETWORKAREA,0,&rcWorkArea,0); 
+	MoveWindow(&rcWorkArea); 
 
 
 	//字体大小
 	LOGFONT m_zoomFont;
-	m_zoomFont.lfHeight	= rectDlg.Height()/50;
+	m_zoomFont.lfHeight	= rectDlg.Height()/70;
 	m_zoomFont.lfWidth	= 0;
 	m_zoomFont.lfEscapement	= 0;
 	m_zoomFont.lfOrientation	= 0;
@@ -86,7 +86,9 @@ BOOL CMfcOfInterfaceTestDlg::OnInitDialog()
 			btn[a].SetFont(&m_font);
 			a++;
 		} 
-	}	
+	}
+	//释放控件数组内存
+	//delete [] btn;
 
 	//试用控件
 	//GetDlgItem(IDC_BUTTON1)->MoveWindow(myRect.GetCRect(19, 0, 19, 3),TRUE);

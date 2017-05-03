@@ -16,7 +16,8 @@ ScreenRect::~ScreenRect(void)
 
 void ScreenRect::ScreenInit(int m, int n, CRect screenRect, int line_offset, int type)
 {
-	vector<vector <CRect> > ivec(m ,vector<CRect>(n, new CRect(0,0,0,0)));    //m*n的二维vector，所有元素为0
+	CRect rect(0,0,0,0);
+	vector<vector <CRect> > ivec(m ,vector<CRect>(n, rect));    //m*n的二维vector，所有元素为0
 	m_rectVector = ivec;
 
 	switch(type){
@@ -43,11 +44,12 @@ void ScreenRect::ScreenInit(int m, int n, CRect screenRect, int line_offset, int
 				for(int j=0; j<n; j++)
 				{
 					if(row != line_w) row++;
-					m_rectVector[i][j] = new CRect(
+					CRect r(
 						line_offset*(j+1)+j*rect_w +row,
 						line_offset*(i+1)+i*rect_h + col,
 						line_offset*(j+1)+(j+1)*rect_w +row,
 						line_offset*(i+1)+(i+1)*rect_h + col);
+					m_rectVector[i][j] = r;
 				}
 			}
 		}
@@ -75,11 +77,12 @@ void ScreenRect::ScreenInit(int m, int n, CRect screenRect, int line_offset, int
 				for(int j=0; j<n; j++)
 				{
 					if(row != line_w+1) row++;
-					m_rectVector[i][j] = new CRect(
+					CRect r(
 						line_offset*(j)+j*rect_w + row -1,
 						line_offset*(i)+i*rect_h + line -1,
 						line_offset*(j)+(j+1)*rect_w + row -1,
 						line_offset*(i)+(i+1)*rect_h + line -1);
+					m_rectVector[i][j] = r;
 				}
 			}
 		}
@@ -104,11 +107,12 @@ void ScreenRect::ScreenInit(int m, int n, CRect screenRect, int line_offset, int
 			{
 				for(int j=0; j<n; j++)
 				{				
-					m_rectVector[i][j] = new CRect(
+					CRect r(
 						j*rect_w + row,
 						i*rect_h + col,
 						(j+1)*rect_w + 1 + row,
 						(i+1)*rect_h + 1 + col);
+					m_rectVector[i][j] = r;
 					if(row != line_w) row++;
 				}
 				if(col != line_h) col++;
